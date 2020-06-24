@@ -9,7 +9,7 @@ module.context.use(router);
 
 // objects CRUD
 router
-  .post("/collection/:collection/insert/", (req, res) => {
+  .post("/insert/:collection/", (req, res) => {
     const data = req.body;
     const colnName = req.pathParams.collection;
     const coln = db._collection(colnName);
