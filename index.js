@@ -39,3 +39,14 @@ router
   .response(["application/json"], "The object inserted.")
   .summary("Inserts object into objects")
   .description("Inserts an object with user specified name and definition.");
+
+router.post("objects/insert/", (req, res) => {
+  const data = req.body;
+  let coln = db._collection("objects");
+  const meta = coln.save(data);
+  res.send(Object.assign(data, meta));
+});
+
+/*
+  PatrickHuynh/dharma-codex-db-api
+  */
