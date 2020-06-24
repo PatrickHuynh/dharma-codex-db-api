@@ -10,7 +10,7 @@ module.context.use(router);
 // general object insert function
 const insertDocument = (collection, document) => {
   const coln = db._collection(collection);
-  const meta = coln.save(data);
+  const meta = coln.save(document);
   return meta;
 };
 
@@ -45,7 +45,7 @@ router
     }
   })
   .pathParam("collection", joi.string().required(), "Collection name")
-  .pathParam("key".object().required(), "Key of document in collection")
+  .pathParam("key", joi.string().required(), "Key of document in collection")
   .response(joi.object().required(), "Document to stored in the collection")
   .summary("Retrieve an entry")
   .description("Retrieves an entry from the collection by key.");
