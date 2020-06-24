@@ -25,14 +25,14 @@ router
 
 router
   .get("/insert/objects/:name/:definition", function (req, res) {
-    res.send(
-      `${req.pathParams.name.toLowerCase().replace(" ", "_")}, ${
-        req.pathParams.name
-      }, ${req.pathParams.definition}`
-    );
+    res.send({
+      _key: `${req.pathParams.name.toLowerCase().replace(" ", "_")}`,
+      name: `${req.pathParams.name}`,
+      definition: `${req.pathParams.definition}`,
+    });
   })
   .pathParam("name", joi.string().required(), "Object name.")
   .pathParam("definition", joi.string().required(), "Object definition.")
-  .response(["text/plain"], "A personalized greeting.")
+  .response(["application/json"], "The object inserted.")
   .summary("Inserts object into objects")
   .description("Inserts an object with user specified name and definition.");
