@@ -22,3 +22,13 @@ router
   .response(["text/plain"], "A personalized greeting.")
   .summary("Personalized greeting")
   .description("Prints a personalized greeting.");
+
+router
+  .get("/insert/objects/:name/:definition", function (req, res) {
+    res.send(`${req.pathParams.name}, ${req.pathParams.definition}`);
+  })
+  .pathParam("name", joi.string().required(), "Object name.")
+  .pathParam("definition", joi.string().required(), "Object definition.")
+  .response(["text/plain"], "A personalized greeting.")
+  .summary("Inserts object into objects")
+  .description("Inserts an object with user specified name and definition.");
