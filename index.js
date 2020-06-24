@@ -47,7 +47,8 @@ router
     const meta = coln.save(data);
     res.send(Object.assign(data, meta));
   })
-  .body(joi.object().required(), "Document to store in the collection");
+  .body(joi.object().required(), "Document to store in the collection")
+  .response(joi.object().required(), "Document to stored in the collection");
 
 /*
   PatrickHuynh/dharma-codex-db-api
