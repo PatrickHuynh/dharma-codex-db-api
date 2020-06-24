@@ -31,7 +31,7 @@ router
 
 // get object
 router
-  .post("/get/:collection/:key", (req, res) => {
+  .get("/get/:collection/:key", (req, res) => {
     try {
       const collectionName = req.pathParams.collection.toLowerCase();
       const key = req.pathParams.key.toLowerCase().replace(" ", "_");
