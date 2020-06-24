@@ -1,4 +1,5 @@
 "use strict";
+const db = require("@arangodb").db;
 const aql = require("@arangodb").aql;
 const createRouter = require("@arangodb/foxx/router");
 const joi = require("joi");
@@ -25,11 +26,13 @@ router
 
 router
   .get("/insert/objects/:name/:definition", function (req, res) {
-    res.send({
+    let obj = {
       _key: `${req.pathParams.name.toLowerCase().replace(" ", "_")}`,
       name: `${req.pathParams.name}`,
       definition: `${req.pathParams.definition}`,
-    });
+    };
+    db._collection("objects").save(obj);
+    res.send(obj);
   })
   .pathParam("name", joi.string().required(), "Object name.")
   .pathParam("definition", joi.string().required(), "Object definition.")
