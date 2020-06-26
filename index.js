@@ -35,8 +35,9 @@ router
   .get("/get/all/:collection", (req, res) => {
     try {
       const collectionName = req.pathParams.collection.toLowerCase();
+      const collection = db._collection(collectionName);
       const result = db
-        ._query(aql`for object in ${collectionName} return object`)
+        ._query(aql`for object in ${collection} return object`)
         .toArray();
       res.send(result);
     } catch (e) {
