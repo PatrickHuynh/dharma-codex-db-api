@@ -38,7 +38,7 @@ router
       const result = query`
         for d in ${collectionName} return d
         `.toArray();
-      res.send(data);
+      res.send(result);
     } catch (e) {
       if (!e.isArangoError || e.errorNum !== DOC_NOT_FOUND) {
         throw e;
