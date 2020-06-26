@@ -35,9 +35,9 @@ router
   .get("/get/all/:collection", (req, res) => {
     try {
       const collectionName = req.pathParams.collection.toLowerCase();
-      const result = query`
-        for object in ${collectionName} return object
-        `.toArray();
+      const result = db
+        ._query(aql`for object in ${collectionName} return object`)
+        .toArray();
       res.send(result);
     } catch (e) {
       if (!e.isArangoError || e.errorNum !== DOC_NOT_FOUND) {
