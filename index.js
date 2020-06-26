@@ -32,11 +32,11 @@ router
 
 // get object
 router
-  .get("/listAll/:collection", (req, res) => {
+  .get("/get/all/:collection", (req, res) => {
     try {
       const collectionName = req.pathParams.collection.toLowerCase();
       const result = query`
-        for d in ${collectionName} return d
+        for object in ${collectionName} return object
         `.toArray();
       res.send(result);
     } catch (e) {
@@ -47,7 +47,10 @@ router
     }
   })
   .pathParam("collection", joi.string().required(), "Collection name")
-  .response(joi.array().required(), "Array of documents from the collection.")
+  .response(
+    joi.array().items(joi.object()),
+    "Array of documents from the collection."
+  )
   .summary("Retrieves all documents")
   .description("Retrieves all documents from the collection.");
 
